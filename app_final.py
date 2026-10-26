@@ -4,7 +4,10 @@ import os
 
 from fastapi import FastAPI
 from dotenv import load_dotenv
+from pydantic import BaseModel
 
+class UserInput(BaseModel):
+  name: str
 
 app = FastAPI(title="F : H")
 load_dotenv('.env', override=True)
@@ -20,10 +23,6 @@ def health():
     return {"status": "ok"}
 
 
-@app.get("/hello")
-def hello(name: str = "студент"):
-    return {"message": f"Привет, {name}!"}
-
 @app.get("/version")
 def hi(vr: str = os.getenv("APP_VERSION", "N/A")):
     return {"version": vr}
@@ -37,3 +36,7 @@ def info():
         "app_name": app_name,
         "author": app_author,
     }
+
+@app.post("/hello")
+def hello(data: UserInput):
+  return {"message": f"Привет, {data.name}!"}
