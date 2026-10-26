@@ -1,8 +1,8 @@
 name: funny_horoscope CI
 
 on:
-	push
-	pull_request
+	push:
+	pull_request:
 
 permissions:
 	contents: read
