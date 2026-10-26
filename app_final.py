@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 
 app = FastAPI(title="F : H")
-load_dotenv('settings.env', override=True)
+load_dotenv('.env', override=True)
 
 
 @app.get("/")
@@ -23,6 +23,10 @@ def health():
 @app.get("/hello")
 def hello(name: str = "студент"):
     return {"message": f"Привет, {name}!"}
+
+@app.get("/version")
+def hi(vr: str = os.getenv("APP_VERSION", "N/A")):
+    return {"version": vr}
 
 @app.get("/info")
 def info():
