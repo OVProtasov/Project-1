@@ -39,7 +39,7 @@ class UserInput(BaseModel):
   name: str
 
 app = FastAPI(title="F : H")
-load_dotenv('.env', override=True)
+load_dotenv('.env.example.env', override=True)
 
 
 @app.get("/")
